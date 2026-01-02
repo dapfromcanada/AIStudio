@@ -1,13 +1,13 @@
-# 📖 AiCopilotDP User Guide
+# 📖 AIStudio User Guide
 
 **Version:** 1.0.0  
 **Last Updated:** January 2, 2026
 
 ---
 
-## What is AiCopilotDP?
+## What is AIStudio?
 
-**AiCopilotDP** (AI Copilot Development Platform) is the master launcher and process manager for AI Studio. It is NOT an AI tool itself—it's a lightweight GUI that launches, monitors, and manages independent AI tools as separate processes.
+**AIStudio** is the master launcher and process manager for AI development tools. It is NOT an AI tool itself—it's a lightweight GUI that launches, monitors, and manages independent AI tools as separate processes.
 
 ### Key Features:
 - 🚀 **One-Click Tool Launching** - Start any registered AI tool with a single click
@@ -27,9 +27,9 @@
    cd G:\AIStudio
    ```
 
-2. **Launch AiCopilotDP**:
+2. **Launch AIStudio**:
    ```powershell
-   .venv\Scripts\python.exe aicopilot_dp.py
+   .venv\Scripts\python.exe ai_studio.py
    ```
 
 3. **The Main Window** will appear showing:
@@ -54,9 +54,9 @@
 #### ▶️ Launch Tool
 - **Purpose:** Start the selected tool as an independent process
 - **Behavior:** 
-  - AiCopilotDP window hides automatically
+  - AIStudio window hides automatically
   - Selected tool opens in its own window
-  - When tool closes, AiCopilotDP reappears
+  - When tool closes, AIStudio reappears
 - **Requirements:** 
   - Must select a tool first
   - Tool must have valid virtual environment (`.venv` folder)
@@ -92,10 +92,10 @@ Displays details about the currently selected tool:
 
 1. **Select the tool** from the Available Tools list
 2. **Click "▶️ Launch Tool"**
-3. **AiCopilotDP hides** - This is normal! It frees resources for your tool
+3. **AIStudio hides** - This is normal! It frees resources for your tool
 4. **Tool window appears** - Work in the tool as needed
 5. **Close the tool** when finished
-6. **AiCopilotDP reappears** automatically
+6. **AIStudio reappears** automatically
 
 ### What If Launch Fails?
 
@@ -153,7 +153,7 @@ Displays details about the currently selected tool:
    - `category` - Tool type for filtering
    - `enabled` - Set to `false` to hide tool without deleting
 
-4. **Save and click "🔄 Refresh List"** in AiCopilotDP
+4. **Save and click "🔄 Refresh List"** in AIStudio
 
 ### Disabling a Tool
 
@@ -169,14 +169,14 @@ Delete the entire tool object from the `"tools"` array in `studio_config.json`.
 
 ### Running Multiple Tools
 
-- You can only launch **one tool at a time** from AiCopilotDP
+- You can only launch **one tool at a time** from AIStudio
 - The launcher tracks the active process
 - Close the current tool before launching another
 - To run multiple tools simultaneously, launch them manually from their folders
 
-### Closing AiCopilotDP With Tools Running
+### Closing AIStudio With Tools Running
 
-If you try to close AiCopilotDP while a tool is running:
+If you try to close AIStudio while a tool is running:
 - **Warning dialog appears:** "Tools are still running. Close anyway?"
 - **Yes:** Launcher closes (tool continues running in background)
 - **No:** Launcher stays open
@@ -206,7 +206,7 @@ This is useful for:
 ```json
 {
   "launcher_version": "1.0.0",
-  "launcher_name": "AiCopilotDP",
+  "launcher_name": "AIStudio",
   "tools": [
     {
       "id": "tool_id",
@@ -256,7 +256,7 @@ Run in foreground to see error messages:
 
 This should be fixed in v1.0.0. If you still see this:
 1. Verify you're using the latest code
-2. Check that `aicopilot_dp.ui` exists in the folder
+2. Check that `ai_studio.ui` exists in the folder
 3. Reinstall PySide6: `pip install --upgrade --force-reinstall PySide6`
 
 ### Tool Doesn't Launch
@@ -276,7 +276,7 @@ This should be fixed in v1.0.0. If you still see this:
 
 - Check if tool process is still running in Task Manager
 - If so, end the process manually
-- Restart AiCopilotDP
+- Restart AIStudio
 
 ---
 

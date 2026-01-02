@@ -40,7 +40,7 @@ tools/
 
 ### STEP 1: Initial Setup
 **What to create:**
-1. New folder in `G:/AI_STUDIO/tools/` with snake_case name
+1. New folder in `G:/AIStudio/tools/` with snake_case name
 2. Navigate into the folder
 3. Create virtual environment: `python -m venv .venv`
 4. Activate: `.venv\Scripts\activate` (Windows) or `source .venv/bin/activate` (Linux/Mac)
@@ -226,9 +226,9 @@ if __name__ == "__main__":
   "tool_name": "tool_name_here",
   "version": "1.0.0",
   "paths": {
-    "raw_data": "G:/AI_STUDIO/data/raw/{tool_specific}",
-    "processed_data": "G:/AI_STUDIO/data/processed/{tool_specific}",
-    "model_output": "G:/AI_STUDIO/models/{tool_name}/exports"
+    "raw_data": "G:/AIStudio/data/raw/{tool_specific}",
+    "processed_data": "G:/AIStudio/data/processed/{tool_specific}",
+    "model_output": "G:/AIStudio/models/{tool_name}/exports"
   },
   "hyperparameters": {
     "epochs": 100,
@@ -245,7 +245,7 @@ if __name__ == "__main__":
 
 **Customization Rules:**
 - Add tool-specific hyperparameters as needed
-- Use absolute paths with G:/AI_STUDIO/ prefix
+- Use absolute paths with G:/AIStudio/ prefix
 - Keep options as booleans for easy GUI toggles
 
 ---
@@ -488,7 +488,7 @@ markdown>=3.5.0
 ---
 
 ### STEP 8: Create Model Output Folder
-**Path:** `G:/AI_STUDIO/models/{tool_name}/`
+**Path:** `G:/AIStudio/models/{tool_name}/`
 
 Create these subfolders:
 - `checkpoints/` - Training checkpoints
@@ -500,7 +500,7 @@ Create these subfolders:
 ### STEP 9: Git Integration
 **Commands:**
 ```bash
-cd G:/AI_STUDIO
+cd G:/AIStudio
 git add tools/{tool_name}/*.py tools/{tool_name}/*.ui tools/{tool_name}/*.json tools/{tool_name}/*.txt
 git commit -m "Add new tool: {Tool Display Name}"
 git push
@@ -515,7 +515,7 @@ git push
 ---
 
 ### STEP 10: Register with Master Launcher
-**Edit:** `G:/AI_STUDIO/studio_config.json`
+**Edit:** `G:/AIStudio/studio_config.json`
 
 Add tool entry:
 ```json
@@ -523,7 +523,7 @@ Add tool entry:
   "id": "tool_name",
   "display_name": "Tool Display Name",
   "description": "Short description of what it does",
-  "path": "G:/AI_STUDIO/tools/tool_name",
+  "path": "G:/AIStudio/tools/tool_name",
   "entry_point": "main_gui.py",
   "icon": "icon.png",
   "category": "Training",
@@ -550,14 +550,14 @@ Add tool entry:
 - ✅ Has `--test` mode for validation
 
 ### Data Rules:
-- ✅ Reads from `G:/AI_STUDIO/data/raw/` or `data/processed/`
-- ✅ Writes models to `G:/AI_STUDIO/models/{tool_name}/`
+- ✅ Reads from `G:/AIStudio/data/raw/` or `data/processed/`
+- ✅ Writes models to `G:/AIStudio/models/{tool_name}/`
 - ✅ Creates `{dataset}_metadata.json` for processed data
 - ✅ Follows naming: `{tool}_{timestamp}_{description}.ext`
 
 ### Configuration Rules:
 - ✅ All settings in `config.json`
-- ✅ Absolute paths with G:/AI_STUDIO/ prefix
+- ✅ Absolute paths with G:/AIStudio/ prefix
 - ✅ Hyperparameters easily editable by user
 
 ### Git Rules:

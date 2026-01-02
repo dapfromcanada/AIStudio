@@ -54,8 +54,8 @@
    cd G:\AIStudio
    ```
 
-2. **Launch from AiCopilotDP** (recommended):
-   - Start AiCopilotDP
+2. **Launch from AIStudio** (recommended):
+   - Start AIStudio
    - Select "Markdown Converter"
    - Click "Launch Tool"
 

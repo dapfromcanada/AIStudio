@@ -1,4 +1,4 @@
-# AiCopilotDP Dependencies
+# AIStudio Dependencies
 # Launcher only - NO AI libraries
 
 # GUI Framework (PySide6 - officially maintained by Qt)

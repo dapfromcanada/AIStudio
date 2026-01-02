@@ -1,0 +1,40 @@
+# Tool Tester .gitignore
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Logs
+logs/
+*.log
+
+# Settings (may contain user paths)
+settings.ini
+
+# Test results (keep in logs folder, not tracked)
+test_results_*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+~*

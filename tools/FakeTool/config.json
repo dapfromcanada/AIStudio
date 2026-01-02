@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "Image viewer tool for testing template and launcher system",
   "paths": {
-    "raw_data": "G:/AI_STUDIO/data/raw/fake_tool",
-    "processed_data": "G:/AI_STUDIO/data/processed/fake_tool",
-    "model_output": "G:/AI_STUDIO/models/fake_tool/exports",
+    "raw_data": "G:/AIStudio/data/raw/fake_tool",
+    "processed_data": "G:/AIStudio/data/processed/fake_tool",
+    "model_output": "G:/AIStudio/models/fake_tool/exports",
     "logs": "logs/"
   },
   "options": {

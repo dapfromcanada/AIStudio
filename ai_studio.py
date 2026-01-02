@@ -10,7 +10,9 @@ import sys
 import json
 from pathlib import Path
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMessageBox, QPushButton, 
-                               QListWidget, QListWidgetItem, QTextEdit, QDialog, QVBoxLayout, QDialogButtonBox)
+                               QListWidget, QListWidgetItem, QTextEdit, QDialog, QVBoxLayout, 
+                               QDialogButtonBox, QLabel, QLineEdit, QComboBox, QFormLayout,
+                               QFileDialog, QGroupBox, QHBoxLayout)
 from PySide6.QtCore import QProcess, QFile, Qt
 from PySide6.QtUiTools import QUiLoader
 
@@ -217,13 +219,47 @@ class AIStudio(QMainWindow):
             pass
     
     def on_add_tool_clicked(self):
-        """Handle add tool button (placeholder)."""
-        QMessageBox.information(
-            self,
-            "Add Tool",
-            "Tool registration wizard coming soon!\n\n"
-            "For now, manually edit studio_config.json"
-        )
+        """Handle add tool button - open registration dialog."""
+        dialog = AddToolDialog(self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            tool_data = dialog.get_tool_data()
+            if self.add_tool_to_config(tool_data):
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    f"Tool '{tool_data['display_name']}' registered successfully!"
+                )
+                self.refresh_tool_list()
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Error",
+                    "Failed to register tool. Check if tool ID already exists."
+                )
+    
+    def add_tool_to_config(self, tool_data):
+        """Add new tool to studio_config.json."""
+        try:
+            # Check if tool ID already exists
+            for tool in self.config.get('tools', []):
+                if tool['id'] == tool_data['id']:
+                    return False
+            
+            # Add tool to config
+            if 'tools' not in self.config:
+                self.config['tools'] = []
+            
+            self.config['tools'].append(tool_data)
+            
+            # Save to file
+            config_path = self.base_path / "studio_config.json"
+            with open(config_path, 'w') as f:
+                json.dump(self.config, f, indent=2)
+            
+            return True
+        except Exception as e:
+            print(f"Error adding tool to config: {e}")
+            return False
     
     def on_help_clicked(self):
         """Open help documentation viewer."""
@@ -252,6 +288,192 @@ class AIStudio(QMainWindow):
                 return
         
         event.accept()
+
+
+class AddToolDialog(QDialog):
+    """Dialog for registering a new tool - auto-reads config.json."""
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Register New Tool")
+        self.resize(600, 400)
+        self.tool_data = None
+        self.setup_ui()
+    
+    def setup_ui(self):
+        """Setup the dialog UI."""
+        layout = QVBoxLayout()
+        
+        # Instructions
+        instructions = QLabel(
+            "<h3>Add New Tool</h3>"
+            "<p>Select a tool folder. AIStudio will automatically read the tool's "
+            "configuration from its <b>config.json</b> file.</p>"
+        )
+        instructions.setWordWrap(True)
+        layout.addWidget(instructions)
+        
+        # Folder selection
+        folder_group = QGroupBox("Tool Folder")
+        folder_layout = QHBoxLayout()
+        self.txt_path = QLineEdit()
+        self.txt_path.setPlaceholderText("No folder selected")
+        self.txt_path.setReadOnly(True)
+        btn_browse = QPushButton("Browse...")
+        btn_browse.clicked.connect(self.browse_tool_folder)
+        folder_layout.addWidget(self.txt_path)
+        folder_layout.addWidget(btn_browse)
+        folder_group.setLayout(folder_layout)
+        layout.addWidget(folder_group)
+        
+        # Tool preview (read-only)
+        preview_group = QGroupBox("Tool Information (Auto-Detected)")
+        preview_layout = QFormLayout()
+        
+        self.lbl_id = QLabel("-")
+        self.lbl_display_name = QLabel("-")
+        self.lbl_description = QLabel("-")
+        self.lbl_entry_point = QLabel("-")
+        
+        preview_layout.addRow("<b>Tool ID:</b>", self.lbl_id)
+        preview_layout.addRow("<b>Display Name:</b>", self.lbl_display_name)
+        preview_layout.addRow("<b>Description:</b>", self.lbl_description)
+        preview_layout.addRow("<b>Entry Point:</b>", self.lbl_entry_point)
+        
+        # Category selection (only user input)
+        self.cmb_category = QComboBox()
+        self.cmb_category.addItems([
+            "Training",
+            "Inference", 
+            "Data Processing",
+            "Testing",
+            "Development",
+            "Utilities",
+            "Other"
+        ])
+        preview_layout.addRow("<b>Category:</b>", self.cmb_category)
+        
+        preview_group.setLayout(preview_layout)
+        layout.addWidget(preview_group)
+        
+        layout.addStretch()
+        
+        # Buttons
+        button_box = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
+        )
+        button_box.accepted.connect(self.validate_and_accept)
+        button_box.rejected.connect(self.reject)
+        layout.addWidget(button_box)
+        
+        self.setLayout(layout)
+    
+    def browse_tool_folder(self):
+        """Open folder browser and read tool config."""
+        folder = QFileDialog.getExistingDirectory(
+            self,
+            "Select Tool Folder",
+            str(Path.cwd() / "tools"),
+            QFileDialog.Option.ShowDirsOnly
+        )
+        if folder:
+            tool_path = Path(folder)
+            self.txt_path.setText(str(tool_path))
+            self.load_tool_config(tool_path)
+    
+    def load_tool_config(self, tool_path):
+        """Read and parse tool's config.json."""
+        config_file = tool_path / "config.json"
+        
+        if not config_file.exists():
+            QMessageBox.warning(
+                self,
+                "Config Not Found",
+                f"No config.json found in:\n{tool_path}\n\n"
+                "Every tool must have a config.json file."
+            )
+            self.clear_preview()
+            return
+        
+        try:
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+            
+            # Extract data from config
+            tool_id = config.get('tool_name', tool_path.name)
+            display_name = config.get('display_name', tool_id.replace('_', ' ').title())
+            description = config.get('description', 'No description available')
+            
+            # Detect entry point (look for main_gui.py)
+            entry_point = "main_gui.py"
+            if not (tool_path / entry_point).exists():
+                QMessageBox.warning(
+                    self,
+                    "Entry Point Not Found",
+                    f"main_gui.py not found in:\n{tool_path}\n\n"
+                    "Tool must have a main_gui.py file."
+                )
+                self.clear_preview()
+                return
+            
+            # Update preview labels
+            self.lbl_id.setText(tool_id)
+            self.lbl_display_name.setText(display_name)
+            self.lbl_description.setText(description)
+            self.lbl_entry_point.setText(entry_point)
+            
+            # Store tool data
+            self.tool_data = {
+                "id": tool_id,
+                "display_name": display_name,
+                "description": description,
+                "path": str(tool_path).replace('\\', '/'),
+                "entry_point": entry_point,
+                "icon": "",
+                "enabled": True
+            }
+            
+        except json.JSONDecodeError:
+            QMessageBox.warning(
+                self,
+                "Invalid Config",
+                f"config.json is not valid JSON:\n{config_file}"
+            )
+            self.clear_preview()
+        except Exception as e:
+            QMessageBox.warning(
+                self,
+                "Error Reading Config",
+                f"Error reading config.json:\n{str(e)}"
+            )
+            self.clear_preview()
+    
+    def clear_preview(self):
+        """Clear the preview labels."""
+        self.lbl_id.setText("-")
+        self.lbl_display_name.setText("-")
+        self.lbl_description.setText("-")
+        self.lbl_entry_point.setText("-")
+        self.tool_data = None
+    
+    def validate_and_accept(self):
+        """Validate before accepting."""
+        if not self.tool_data:
+            QMessageBox.warning(
+                self,
+                "No Tool Selected",
+                "Please select a valid tool folder with config.json"
+            )
+            return
+        
+        # Add category to tool data
+        self.tool_data["category"] = self.cmb_category.currentText()
+        
+        self.accept()
+    
+    def get_tool_data(self):
+        """Return tool data dictionary."""
+        return self.tool_data
 
 
 class HelpViewer(QDialog):

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "YOLO Object Detection Testing Tool",
   "paths": {
-    "raw_data": "G:/AI_STUDIO/data/raw/vision_tester",
-    "processed_data": "G:/AI_STUDIO/data/processed/vision_tester",
-    "model_output": "G:/AI_STUDIO/models/vision_tester/exports"
+    "raw_data": "G:/AIStudio/data/raw/vision_tester",
+    "processed_data": "G:/AIStudio/data/processed/vision_tester",
+    "model_output": "G:/AIStudio/models/vision_tester/exports"
   },
   "model": {
     "name": "yolo11x.pt",

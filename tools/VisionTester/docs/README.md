@@ -25,7 +25,7 @@ Vision Tester is a comprehensive YOLO object detection testing tool designed for
 
 1. **Navigate to tool directory:**
 ```bash
-cd G:\AIStudio\tools\Vision_Tester
+cd G:\AIStudio\tools\VisionTester
 ```
 
 2. **Activate virtual environment:**
@@ -338,9 +338,9 @@ python engine.py --config config.json --mode batch --input /data/images/ --outpu
 Vision Tester is designed to integrate seamlessly with the AI Studio ecosystem:
 
 ### Data Flow
-1. **Input:** Raw images from `G:/AI_STUDIO/data/raw/vision_tester/`
+1. **Input:** Raw images from `G:/AIStudio/data/raw/vision_tester/`
 2. **Processing:** Detection via GUI or CLI engine
-3. **Output:** Results to `G:/AI_STUDIO/models/vision_tester/exports/`
+3. **Output:** Results to `G:/AIStudio/models/vision_tester/exports/`
 
 ### Master Launcher Integration
 The tool can be registered in `studio_config.json`:
@@ -350,7 +350,7 @@ The tool can be registered in `studio_config.json`:
   "id": "vision_tester",
   "display_name": "Vision Tester",
   "description": "YOLO object detection testing tool",
-  "path": "G:/AI_STUDIO/tools/vision_tester",
+  "path": "G:/AIStudio/tools/VisionTester",
   "entry_point": "main_gui.py",
   "category": "Testing",
   "enabled": true

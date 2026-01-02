@@ -17,7 +17,7 @@ Fake Tool is a simple image viewer application designed to test the AI Studio te
 ### GUI Mode (Recommended)
 1. **Run the GUI:**
    ```bash
-   cd G:/AI_STUDIO/tools/FakeTool
+   cd G:/AIStudio/tools/FakeTool
    .venv\Scripts\activate
    python main_gui.py
    ```
@@ -183,14 +183,14 @@ python main_gui.py
 ## Integration with AI Studio
 
 ### Launcher Registration
-To register this tool with the master launcher, add to `G:/AI_STUDIO/studio_config.json`:
+To register this tool with the master launcher, add to `G:/AIStudio/studio_config.json`:
 
 ```json
 {
   "id": "fake_tool",
   "display_name": "Fake Tool - Image Viewer",
   "description": "Test tool for template validation and image viewing",
-  "path": "G:/AI_STUDIO/tools/FakeTool",
+  "path": "G:/AIStudio/tools/FakeTool",
   "entry_point": "main_gui.py",
   "icon": "icon.png",
   "category": "Testing",

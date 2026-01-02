@@ -21,6 +21,26 @@
       "icon": "",
       "category": "Data Processing",
       "enabled": true
+    },
+    {
+      "id": "tool_tester",
+      "display_name": "Tool Tester",
+      "description": "Automated testing system for AIStudio tools - Quality assurance and regression testing",
+      "path": "G:/AIStudio/tools/tool_tester",
+      "entry_point": "main_gui.py",
+      "icon": "",
+      "category": "Development",
+      "enabled": true
+    },
+    {
+      "id": "vision_tester",
+      "display_name": "Vision Tester",
+      "description": "YOLO Object Detection Testing Tool",
+      "path": "G:/AIStudio/tools/VisionTester",
+      "entry_point": "main_gui.py",
+      "icon": "",
+      "enabled": true,
+      "category": "Training"
     }
   ]
 }

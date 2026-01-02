@@ -1,0 +1,8 @@
+# Tool Tester Requirements
+# Minimal dependencies for testing AIStudio tools
+
+# GUI Framework
+PySide6>=6.6.0
+
+# Markdown rendering for help viewer
+markdown>=3.5.0

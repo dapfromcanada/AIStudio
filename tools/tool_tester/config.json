@@ -1,0 +1,15 @@
+{
+  "tool_name": "tool_tester",
+  "display_name": "Tool Tester",
+  "version": "1.0.0",
+  "description": "Automated testing system for AIStudio tools",
+  "paths": {
+    "logs": "logs/",
+    "results": "logs/test_results_{timestamp}.json"
+  },
+  "options": {
+    "test_timeout": 30,
+    "auto_refresh": true,
+    "enable_logging": true
+  }
+}
