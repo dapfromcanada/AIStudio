@@ -8,11 +8,10 @@ NOT an AI tool itself - pure process management.
 
 import sys
 import json
-import subprocess
 from pathlib import Path
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMessageBox, QPushButton, 
-                               QListWidget, QListWidgetItem, QTextEdit, QDialog, QVBoxLayout, QDialogButtonBox, QToolBar)
-from PySide6.QtCore import QTimer, QProcess, QFile, Qt
+                               QListWidget, QListWidgetItem, QTextEdit, QDialog, QVBoxLayout, QDialogButtonBox)
+from PySide6.QtCore import QProcess, QFile, Qt
 from PySide6.QtUiTools import QUiLoader
 
 
@@ -297,7 +296,6 @@ class HelpViewer(QDialog):
         """Convert markdown to beautiful HTML using markdown library."""
         try:
             import markdown
-            from markdown.extensions import fenced_code, tables, nl2br
             
             # Convert markdown to HTML with extensions
             html_body = markdown.markdown(

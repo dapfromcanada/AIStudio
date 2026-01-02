@@ -68,6 +68,14 @@ tools/
 - Use layouts (QVBoxLayout, QHBoxLayout) not absolute positioning
 - Add icons/labels for clarity
 
+**⚠️ CRITICAL - If Hand-Coding UI XML:**
+If Qt Designer is unavailable and you must hand-code the .ui file:
+- **ALWAYS use `class` attribute for widget type:** `<widget class="QGroupBox" name="grp_folders">`
+- **NEVER duplicate `name` attribute:** ❌ `<widget name="QGroupBox" name="grp_folders">` 
+- Widget syntax: `<widget class="{WidgetClass}" name="{instance_name}">`
+- Test immediately: Run `python main_gui.py` to catch XML syntax errors early
+- Common error: "Attribute 'name' redefined" means you used `name` instead of `class`
+
 ---
 
 ### STEP 3: Build the Engine (Headless AI Logic)

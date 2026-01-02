@@ -1,0 +1,27 @@
+{
+  "tool_name": "md_converter",
+  "display_name": "Markdown Converter",
+  "version": "1.0.0",
+  "description": "Convert documents, images, and files to Markdown using AI-powered extraction",
+  "paths": {
+    "input_folder": "",
+    "output_folder": "G:/AIStudio/data/processed/md_converter",
+    "logs": "logs/"
+  },
+  "options": {
+    "supported_formats": [
+      "pdf", "docx", "doc", "pptx", "ppt",
+      "png", "jpg", "jpeg", "gif", "bmp", "tiff",
+      "html", "htm",
+      "xlsx", "xls",
+      "txt", "rtf", "odt"
+    ],
+    "enable_logging": true,
+    "batch_processing": true
+  },
+  "gui_settings": {
+    "window_width": 1000,
+    "window_height": 750,
+    "remember_folders": true
+  }
+}

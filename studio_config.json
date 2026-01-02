@@ -11,6 +11,16 @@
       "icon": "",
       "category": "Testing",
       "enabled": true
+    },
+    {
+      "id": "md_converter",
+      "display_name": "Markdown Converter",
+      "description": "Convert documents, images, and files to Markdown using AI-powered extraction",
+      "path": "G:/AIStudio/tools/md_converter",
+      "entry_point": "main_gui.py",
+      "icon": "",
+      "category": "Data Processing",
+      "enabled": true
     }
   ]
 }

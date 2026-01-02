@@ -1,0 +1,39 @@
+# MD Converter .gitignore
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Logs
+logs/
+*.log
+
+# Settings (may contain user paths)
+settings.ini
+
+# Converted files (output)
+*.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test files
+tests/__pycache__/
+.pytest_cache/

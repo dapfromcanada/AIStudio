@@ -1,0 +1,17 @@
+# MD Converter Dependencies
+# Tool for converting documents to markdown
+
+# GUI Framework
+PySide6>=6.6.0
+
+# Document conversion (AI-powered)
+docling>=2.0.0
+
+# Markdown rendering (for help viewer)
+markdown>=3.5.0
+
+# Standard utilities included in Python stdlib:
+# - subprocess (process management)
+# - json (config handling)
+# - logging (status tracking)
+# - pathlib (file operations)
